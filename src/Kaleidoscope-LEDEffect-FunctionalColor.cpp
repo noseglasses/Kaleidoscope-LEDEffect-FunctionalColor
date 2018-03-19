@@ -37,6 +37,7 @@ void LEDFunctionalColorCB::setAllPalette(const cRGB &color, byte brightness)
   
 void LEDFunctionalColorCB::setPaletteEntryColor(byte paletteId, const cRGB &color, byte brightness)
 {
+   assert(paletteId < nPaletteEntries_);
    palette_[paletteId] = dim(color, brightness);
 }
 
@@ -58,6 +59,7 @@ void LEDFunctionalColorCB::setKeyLed(uint8_t r, uint8_t c) {
   byte paletteId = colorBrightness >> 4;
   byte brightness = colorBrightness & 0xF; // keys have individual brightness
   
+   assert(paletteId < nPaletteEntries_);
   const auto &color = palette_[paletteId];
   
   ::LEDControl.setCrgbAt(r, c, dim(color, brightness));
